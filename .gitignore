@@ -28,6 +28,8 @@ apk-extracted/
 # Ignore archives & temp downloads
 *.zip
 *.tar.gz
+*.jar
+*.mpp
 
 # Ignore jadx decompilation output
 jadx-out/

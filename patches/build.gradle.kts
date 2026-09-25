@@ -1,4 +1,6 @@
 group = "non7043"
+version = "1.0.0"
+
 
 patches {
     about {

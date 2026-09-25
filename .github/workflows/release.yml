@@ -39,6 +39,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Setup Gradle Credentials
+        env:
+          GPR_USER: ${{ github.actor }}
+          GPR_KEY: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p ~/.gradle
+          echo "gpr.user=$GPR_USER" >> ~/.gradle/gradle.properties
+          echo "gpr.key=$GPR_KEY" >> ~/.gradle/gradle.properties
+
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
@@ -46,7 +55,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
-        run: ./gradlew :patches:buildAndroid -Pgpr.user=${{ github.actor }} -Pgpr.key="${{ secrets.PAT || secrets.GITHUB_TOKEN }}" --stacktrace
+        run: |
+          ./gradlew :patches:buildAndroid -Pversion=1.0.0 --stacktrace --no-daemon
+          echo "Build finished. Directory contents:"
+          ls -la patches/build/libs/
+          for f in patches/build/libs/*.mpp; do
+            if [ -f "$f" ] && [ "$f" != "patches/build/libs/patches-1.0.0.mpp" ]; then
+              cp "$f" patches/build/libs/patches-1.0.0.mpp
+            fi
+          done
 
       - name: Get version from tag or commit
         id: version
@@ -57,7 +74,7 @@ jobs:
             echo "version=v1.0.0" >> $GITHUB_OUTPUT
           fi
 
-      - name: Create Release
+      - name: Create or Update Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.version }}
@@ -68,5 +85,7 @@ jobs:
           files: |
             patches/build/libs/*.mpp
             patches/build/libs/*.jar
+            patches-bundle.json
+            patches-list.json
         env:
           GITHUB_TOKEN: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
