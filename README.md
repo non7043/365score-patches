@@ -11,10 +11,13 @@ Morphe patches for the <strong>365Score</strong> sports app<br>
 
 ### Morphe Manager
 
-Tap the link to add this as a patch source in Morphe Manager:
+[![Add to Morphe](https://img.shields.io/badge/Add%20to-Morphe-blue?logo=android&style=for-the-badge)](https://morphe.software/add-source?github=non7043/365score-patches)
 
+[**➕ Click here to add 365Score Patches to Morphe Manager**](https://morphe.software/add-source?github=non7043/365score-patches)
 
-[**➕ Add 365Score Patches to Morphe**](https://morphe.software/add-source?github=non7043/365score-patches)
+Or in Morphe Manager (**Settings** / **Sources** ➔ **+**), enter:
+`https://github.com/non7043/365score-patches`
+*(or `https://raw.githubusercontent.com/non7043/365score-patches/main/patches-bundle.json`)*
 
 Then patch 365Score:
 1. Tap the 365Score app icon in Morphe
