@@ -64,13 +64,16 @@ val unlockPremiumPatch = bytecodePatch(
         )
 
         for (target in targets) {
-            target.method.addInstructions(
-                0,
-                """
-                const/4 v0, 0x1
-                return v0
-                """.trimIndent(),
-            )
+            val method = target.methodOrNull ?: continue
+            if (method.implementation != null) {
+                method.addInstructions(
+                    0,
+                    """
+                    const/4 v0, 0x1
+                    return v0
+                    """.trimIndent(),
+                )
+            }
         }
     }
 }

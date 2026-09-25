@@ -39,7 +39,8 @@ val blockUpdateScreenPatch = bytecodePatch(
         )
 
         for (target in targets) {
-            val method = target.method
+            val method = target.methodOrNull ?: continue
+            if (method.implementation == null) continue
             for (instruction in method.instructions) {
                 if (instruction.opcode == Opcode.CONST_STRING || instruction.opcode == Opcode.CONST_STRING_JUMBO) {
                     val ref = (instruction as? Instruction21c)?.reference as? StringReference
