@@ -8,5 +8,5 @@ const val PACKAGE_365SCORE = "com.scores365"
  * Add supported versions here as they are validated.
  */
 val COMPATIBILITY_365SCORE = arrayOf(
-    PACKAGE_365SCORE to arrayOf("14.9.5"),
+    PACKAGE_365SCORE to setOf("14.9.5"),
 )
