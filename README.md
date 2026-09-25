@@ -13,7 +13,6 @@ Morphe patches for the <strong>365Score</strong> sports app<br>
 
 Tap the link to add this as a patch source in Morphe Manager:
 
-> **⚠️ Replace `non7043` with your actual GitHub username before sharing this link**
 
 [**➕ Add 365Score Patches to Morphe**](https://morphe.software/add-source?github=non7043/365score-patches)
 
