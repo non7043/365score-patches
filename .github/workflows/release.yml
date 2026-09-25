@@ -46,7 +46,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
-        run: ./gradlew :patches:buildAndroid --stacktrace
+        run: ./gradlew :patches:buildAndroid -Pgpr.user=${{ github.actor }} -Pgpr.key="${{ secrets.PAT || secrets.GITHUB_TOKEN }}" --stacktrace
 
       - name: Get version from tag or commit
         id: version
